@@ -7,16 +7,29 @@ import SideDrawer from './SideDrawer';
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [headerShow, setHeaderShow] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY) {
+      setHeaderShow(true);
+    } else {
+      setHeaderShow(false);
+    }
+  };
 
   const toggleDrawer = value => {
     setDrawerOpen(value);
   };
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <AppBar
       positition="fixed"
       style={{
-        backgroundColor: '#2f2f2f',
+        backgroundColor: headerShow ? '#2f2f2f' : 'transparent',
         boxShadow: 'none',
         padding: '10px 0px',
       }}
